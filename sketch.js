@@ -1,17 +1,33 @@
-createGrid();
+const container = document.querySelector("div.grid-container");
 
-const squares = document.querySelectorAll("div.grid-container > div");
-squares.forEach(square => square.addEventListener("mouseover", colorSquare));
+createGrid(16);
+
+const button = document.querySelector("button.size-button");
+button.addEventListener("click", changeGridSize)
+
+function changeGridSize(e) {
+
+    let size = prompt("Insert the size of the grid (e.g 32 = 32x32");
+    if (size > 100) {
+        alert("Value cannot be higher than 100");
+        return;
+    }
+
+    container.textContent = "";
+    createGrid(size);
+}
 
 function colorSquare(e) {
     this.style.backgroundColor = "black";
 }
 
-function createGrid() {
-    const container = document.querySelector("div.grid-container");
-    for (let i = 0; i < (16 * 16); i++) {
+function createGrid(size) {
+
+    for (let i = 0; i < (size * size); i++) {
         const square = document.createElement("div");
         square.classList.add("square");
+        square.addEventListener("mouseover", colorSquare);
         container.appendChild(square);
     }
+
 }
