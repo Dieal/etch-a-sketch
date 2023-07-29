@@ -1,5 +1,6 @@
 let color = "black";
 let gridSize = 0;
+let toggleDraw = false;
 
 const container = document.querySelector("div.grid-container");
 
@@ -37,9 +38,10 @@ function randomizeRGB() {
 
 function colorSquare(e) {
     let squareColor = "";
+    if (!toggleDraw) return;
     if (color === "black") squareColor = color;
     if (color === "random") squareColor = randomizeRGB();
-    this.style.backgroundColor = squareColor; 
+    e.target.style.backgroundColor = squareColor; 
 }
 
 function createGrid(size) {
@@ -49,6 +51,11 @@ function createGrid(size) {
         const square = document.createElement("div");
         square.classList.add("square");
         square.style.width = percentage;
+        square.addEventListener("mousedown", (e) => {
+            toggleDraw = true; 
+            colorSquare(e);
+        });
+        square.addEventListener("mouseup", () => toggleDraw = false);
         square.addEventListener("mouseover", colorSquare);
         container.appendChild(square);
     }
