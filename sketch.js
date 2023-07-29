@@ -1,11 +1,7 @@
 let color = "black";
+let gridSize = 0;
+
 const container = document.querySelector("div.grid-container");
-
-createGrid(16);
-
-const gridSizeButton = document.querySelector("div.buttons > button.size-button");
-console.log(gridSizeButton)
-gridSizeButton.addEventListener("click", changeGridSize)
 
 const blackColorButton = document.querySelector("div.buttons > button.black-color");
 blackColorButton.addEventListener("click", () => color = "black");
@@ -13,16 +9,19 @@ blackColorButton.addEventListener("click", () => color = "black");
 const randomColorButton = document.querySelector("div.buttons > button.random-color");
 randomColorButton.addEventListener("click", () => color = "random");
 
-function changeGridSize(e) {
+const slider = document.querySelector("input.slider");
+gridSize = slider.value;
+slider.addEventListener("change", () => {
+    gridSize = slider.value
+    changeGridSize(gridSize);    
+});
 
-    let size = prompt("Insert the size of the grid (e.g 32 = 32x32");
-    if (size > 100) {
-        alert("Value cannot be higher than 100");
-        return;
-    }
+createGrid(gridSize);
 
+
+function changeGridSize(gridSize) {
     container.textContent = "";
-    createGrid(size);
+    createGrid(gridSize);
 }
 
 function randomizeRGB() {
