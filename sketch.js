@@ -23,9 +23,11 @@ function colorSquare(e) {
 
 function createGrid(size) {
 
+    let percentage = (1 / size * 100) + "%";
     for (let i = 0; i < (size * size); i++) {
         const square = document.createElement("div");
         square.classList.add("square");
+        square.style.width = percentage;
         square.addEventListener("mouseover", colorSquare);
         container.appendChild(square);
     }
