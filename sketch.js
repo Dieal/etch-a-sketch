@@ -10,18 +10,29 @@ blackColorButton.addEventListener("click", () => color = "black");
 const randomColorButton = document.querySelector("div.buttons > button.random-color");
 randomColorButton.addEventListener("click", () => color = "random");
 
+const clearGridButton = document.querySelector("div.buttons > button.clear-button");
+clearGridButton.addEventListener("click", () => clearGrid());
+
 const slider = document.querySelector("input.slider");
 gridSize = slider.value;
 slider.addEventListener("change", () => {
     gridSize = slider.value
-    changeGridSize(gridSize);    
+    changeGrid(gridSize);    
 });
 
 createGrid(gridSize);
 
-
-function changeGridSize(gridSize) {
+function deleteGrid() {
     container.textContent = "";
+}
+
+// This creates a new grid with the same size as before
+function clearGrid() {
+    changeGrid(gridSize);
+}
+
+function changeGrid(gridSize) {
+    deleteGrid();
     createGrid(gridSize);
 }
 
